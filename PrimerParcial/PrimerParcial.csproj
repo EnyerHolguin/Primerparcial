@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="BLL\" />
-    <Folder Include="DAL\Scripts\" />
-    <Folder Include="Entidades\" />
     <Folder Include="Resources\" />
     <Folder Include="UI\Consultas\" />
     <Folder Include="UI\Reportes\" />
