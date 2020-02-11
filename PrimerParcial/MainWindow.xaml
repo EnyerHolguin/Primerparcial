@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:PrimerParcial"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FF7A9AF1">
+        <Label x:Name="Descripcion" Content="Descripcion" HorizontalAlignment="Left" Margin="158,94,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Existencia" HorizontalAlignment="Left" Margin="159,131,0,0" VerticalAlignment="Top" Width="65"/>
+        <Label Content="Costo" HorizontalAlignment="Left" Margin="158,174,0,0" VerticalAlignment="Top" Width="66"/>
+        <Label Content="Valorinventario" HorizontalAlignment="Left" Margin="159,217,0,0" VerticalAlignment="Top" Width="91"/>
+        <Label Content="ProductoId" HorizontalAlignment="Left" Margin="159,54,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="ProductoIdTextBox" HorizontalAlignment="Left" Margin="255,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65" Height="18"/>
+        <TextBox x:Name="DescripcionTextBox" HorizontalAlignment="Left" Margin="255,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <TextBox x:Name="ExistenciaTextBox" HorizontalAlignment="Left" Margin="255,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <TextBox x:Name="CostoTextBox" HorizontalAlignment="Left" Margin="255,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <TextBox x:Name="ValorinventarioTextBox" HorizontalAlignment="Left" Margin="255,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <Button x:Name="NuevoButton" Content="Nuevo" HorizontalAlignment="Left" Margin="172,257,0,0" VerticalAlignment="Top" Click="NuevoButton_Click"/>
+        <Button x:Name="GuardarButton" Content="Guardar" HorizontalAlignment="Left" Margin="255,257,0,0" VerticalAlignment="Top" Click="GuardarButton_Click"/>
+        <Button x:Name="EliminarButton" Content="Eliminar" HorizontalAlignment="Left" Margin="340,257,0,0" VerticalAlignment="Top" Click="EliminarButton_Click"/>
+        <Button x:Name="BuscarButton" Content="Buscar" HorizontalAlignment="Left" Margin="344,67,0,0" VerticalAlignment="Top" Click="BuscarButton_Click"/>
 
     </Grid>
 </Window>
