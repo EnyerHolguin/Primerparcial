@@ -25,14 +25,17 @@ namespace PrimerParcial
         public MainWindow()
         {
             InitializeComponent();
+            ProductoIdTextBox.Text = "0";
+            //Consulta c = new Consulta();
+           // c.Show();
         }
         private void Limpiar()
         {
-            ProductoIdTextBox.Text = string.Empty;
+            ProductoIdTextBox.Text = "0";
             DescripcionTextBox.Text = string.Empty;
-            ExistenciaTextBox.Text = "0";
-            CostoTextBox.Text = "0";
-            ValorinventarioTextBox.Text = "0";
+            ExistenciaTextBox.Text = string.Empty;
+            CostoTextBox.Text = string.Empty;
+            ValorinventarioTextBox.Text = string.Empty;
 
         }
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -45,54 +48,51 @@ namespace PrimerParcial
             Productos Producto = new Productos();
 
             Producto.ProductoId = Convert.ToInt32(ProductoIdTextBox.Text);
-            Producto.Descripcion = String.Empty;
+            Producto.Descripcion = DescripcionTextBox.Text;
             Producto.Existencia = Convert.ToInt32(ExistenciaTextBox.Text);
             Producto.Costo = Convert.ToInt32(CostoTextBox.Text);
-            Producto.Valorinventario = Convert.ToInt32(ValorinventarioTextBox.Text);
+            Producto.Valorinventario = Convert.ToInt32(Producto.Existencia * Producto.Costo);
 
             return Producto;
         }
         private void LlenaCampo(Productos Producto)
         {
             ProductoIdTextBox.Text = Convert.ToString(Producto.ProductoId);
-            DescripcionTextBox.Text = String.Empty;
+            DescripcionTextBox.Text = Producto.Descripcion;
             ExistenciaTextBox.Text = Convert.ToString(Producto.Existencia);
             CostoTextBox.Text = Convert.ToString(Producto.Costo);
+            ValorinventarioTextBox.Text = Convert.ToString(Producto.Valorinventario);
         }
         private bool Validar()
         {
             bool paso = true;
 
-            if (ProductoIdTextBox.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(DescripcionTextBox.Text)) 
             {
-                MessageBox.Show("El campo ID no puede estar vacio");
+                MessageBox.Show("El campo Descripcion no puede estar vacio");
                 ProductoIdTextBox.Focus();
                 paso = false;
             }
             if (DescripcionTextBox.Text == string.Empty)
             {
-                MessageBox.Show("El Descripcion campo no puede estar vacio");
+                MessageBox.Show("La Descripcion  no puede estar vacio");
                 ProductoIdTextBox.Focus();
                 paso = false;
             }
-            if (ExistenciaTextBox.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(ExistenciaTextBox.Text))
             {
-                MessageBox.Show("El Descripcion campo no puede estar vacio");
-                ProductoIdTextBox.Focus();
+                MessageBox.Show("La existencia no puede estar vacia");
+                ExistenciaTextBox.Focus();
                 paso = false;
             }
-            if (CostoTextBox.Text == string.Empty)
+
+            if (string.IsNullOrWhiteSpace(CostoTextBox.Text))
             {
-                MessageBox.Show("El campo costos no puede estar vacio");
-                ProductoIdTextBox.Focus();
+                MessageBox.Show("el costo no puede estar vacio");
+                CostoTextBox.Focus();
                 paso = false;
             }
-            if (ValorinventarioTextBox.Text == string.Empty)
-            {
-                MessageBox.Show("El campo valor inventario  no puede estar vacio");
-                ProductoIdTextBox.Focus();
-                paso = false;
-            }
+
 
 
             return paso;
@@ -107,13 +107,14 @@ namespace PrimerParcial
 
         private void GuardarButton_Click(object sender, RoutedEventArgs e)
         {
-            Productos Producto;
+            Productos Producto = new Productos();
             bool paso = false;
+
             if (!Validar())
                 return;
 
             Producto = LlenaClase();
-            if (Convert.ToInt32(ProductoIdTextBox.Text) == 0)
+            if (ProductoIdTextBox.Text == "0")
                 paso = ProductosBLL.Guardar(Producto);
             else
             {
@@ -124,6 +125,8 @@ namespace PrimerParcial
                 }
                 paso = ProductosBLL.Modificar(Producto);
             }
+
+
             if (paso)
             {
                 Limpiar();
@@ -133,8 +136,6 @@ namespace PrimerParcial
             else
                 MessageBox.Show("Guardado", "Exito", MessageBoxButton.OK, MessageBoxImage.Error);
 
-
-
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
@@ -143,16 +144,12 @@ namespace PrimerParcial
             int.TryParse(ProductoIdTextBox.Text, out id);
 
             Limpiar();
-            if (!ExisteEnLaBaseDeDAto())
+            if (ProductosBLL.Eliminar(id))
             {
-                MessageBox.Show("No se puede eliminar un producto inexistente", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Eliminado", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
-            {
-                if (ProductosBLL.Eliminar(id))
-                    MessageBox.Show("Eliminado", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-
+                MessageBox.Show("No se Puede Eliminar un producto que no existe");
 
         }
 
@@ -161,19 +158,64 @@ namespace PrimerParcial
             int id;
             Productos Producto = new Productos();
             int.TryParse(ProductoIdTextBox.Text, out id);
+
             Limpiar();
+
             Producto = ProductosBLL.Buscar(id);
+
             if (Producto != null)
             {
+                MessageBox.Show("Encontrado");
                 LlenaCampo(Producto);
             }
             else
-            {
-                MessageBox.Show("Persona No Encontarda....");
-            }
+                MessageBox.Show("producto no encontrado ....");
+            
 
          }
-       }
+
+        private void ExistenciaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ExistenciaTextBox.Text) && !string.IsNullOrWhiteSpace(CostoTextBox.Text))
+            {
+                int Num1;
+                decimal Num2;
+
+                Num1 = Convert.ToInt32(ExistenciaTextBox.Text);
+                Num2 = Convert.ToDecimal(CostoTextBox.Text);
+
+                ValorinventarioTextBox.Text = Convert.ToString(Num1 * Num2);
+            }
+        }
+
+        private void CostoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ExistenciaTextBox.Text) && !string.IsNullOrWhiteSpace(CostoTextBox.Text))
+            {
+                int Num1;
+                decimal Num2;
+
+                Num1 = Convert.ToInt32(ExistenciaTextBox.Text);
+                Num2 = Convert.ToDecimal(CostoTextBox.Text);
+
+                ValorinventarioTextBox.Text = Convert.ToString(Num1 * Num2);
+            }
+        }
+
+        private void ValorinventarioTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ExistenciaTextBox.Text) && !string.IsNullOrWhiteSpace(CostoTextBox.Text))
+            {
+                int Num1;
+                decimal Num2;
+
+                Num1 = Convert.ToInt32(ExistenciaTextBox.Text);
+                Num2 = Convert.ToDecimal(CostoTextBox.Text);
+
+                ValorinventarioTextBox.Text = Convert.ToString(Num1 * Num2);
+            }
+        }
     }
+}
 
 

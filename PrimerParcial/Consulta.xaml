@@ -12,9 +12,11 @@
             <RowDefinition Height="173*"/>
         </Grid.RowDefinitions>
         <Button x:Name="ConsultaButton" Content="Consulta" HorizontalAlignment="Left" Margin="548,44,0,0" VerticalAlignment="Top" Height="39" Width="81" Click="ConsultaButton_Click"/>
-        <DataGrid Grid.Row="1"/>
+        <DataGrid x:Name="ConsultaDataGrid" Grid.Row="1"/>
         <Label x:Name="Cristerio" Content="Cristerio" HorizontalAlignment="Left" Margin="435,26,0,37" Width="89"/>
         <TextBox x:Name="CristerioTextBox" HorizontalAlignment="Left" Margin="420,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Filtro" HorizontalAlignment="Left" Margin="297,26,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+        <ComboBox x:Name="FiltrarComboBox" HorizontalAlignment="Left" Margin="254,54,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

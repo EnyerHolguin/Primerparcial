@@ -15,19 +15,14 @@ namespace PrimerParcial.Entidades
         public decimal Costo { get; set; }
         public decimal Valorinventario { get; set; }
 
+
         public Productos()
         {
-            
-            
-        }
-
-        public Productos(int productoId, string descripcion, decimal existencia, decimal costo, decimal valorinventario)
-        {
-            ProductoId = productoId;
-            Descripcion = descripcion;
-            Existencia = existencia;
-            Costo = costo;
-            Valorinventario = valorinventario;
+            ProductoId = 0;
+            Descripcion = string.Empty; 
+            Existencia = 0;
+            Costo = 0;
+            Valorinventario = 0;
         }
     }
 }

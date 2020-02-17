@@ -82,9 +82,9 @@ namespace PrimerParcial.BLL
             }
             public static Productos Buscar(int id)
             {
-
+                Productos Producto = new Productos();
                 Context db = new Context();
-               Productos Producto = new Productos();
+               
                 try
                 {
                     Producto = db.Productos.Find(id);

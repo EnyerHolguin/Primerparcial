@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="buscar2.png" />
+    <None Remove="eliminar.jpg" />
+    <None Remove="gu.png" />
+    <None Remove="guardar.png" />
+    <None Remove="new.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="UI\Consultas\" />
     <Folder Include="UI\Reportes\" />
@@ -15,6 +23,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="buscar2.png" />
+    <Resource Include="eliminar.jpg" />
+    <Resource Include="gu.png" />
+    <Resource Include="guardar.png" />
+    <Resource Include="new.jpg" />
   </ItemGroup>
 
 </Project>
