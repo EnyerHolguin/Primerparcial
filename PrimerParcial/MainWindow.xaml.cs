@@ -26,8 +26,8 @@ namespace PrimerParcial
         {
             InitializeComponent();
             ProductoIdTextBox.Text = "0";
-            //Consulta c = new Consulta();
-           // c.Show();
+            Consulta c = new Consulta();
+            c.Show();
         }
         private void Limpiar()
         {
