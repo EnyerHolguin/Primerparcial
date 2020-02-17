@@ -4,11 +4,13 @@ USE ProductosDb
 GO
 CREATE TABLE Productos
 (
-   PrestamosId int primary key identity,
+   ProductoId int primary key identity,
    Descripcion varchar(30),
-   Existentia decimal,
+   Existencia decimal,
    Costo decimal,
    Valorinventario decimal,
 
 
 )
+
+drop table Productos
